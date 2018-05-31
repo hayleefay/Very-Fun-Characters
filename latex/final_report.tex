@@ -42,7 +42,6 @@
 
 \begin{document}
 \maketitle
-\makeauthor
 \begin{abstract}
   The purpose of this project was to use small book synopses to predict positive or negative character relationships. This is based off of work by Snigdha Chaturvedi et al. (2016) in which evolving character relationships are modelled by training a Hidden Markov Model on key text features. Our group recreates this analysis and extends it by also using LSTM Neural Networks to capture character relationships. RESULTS SHOW SOMETHING  
 \end{abstract}
@@ -69,7 +68,7 @@ As previously mentioned, our project is, in part, a recreation of the Chaturvedi
 Positive and negative verb interaction features were extracted for three separate instances: characters verb together, one character verbs another, and character verb separately. In order to engineer these features, part of speech tagging and dependency parsing were run to capture the structure of the sentence and individual word roles. For characters verb together, verbs were included if they were ancestors of both characters in a sentence. For one character verbs another, verbs were included if it was between and object and subject and the object and subject were the two main characters of that sentence. Verbs that were an ancestor to either of the characters and weren't already included in another set (either characters verb together or one character verbs another) were added to the single character verbs set. Sentiment analysis was then done on all of the verbs included and a binary indicator was created to identify whether characters negatively or positively verbed. 
 In order to capture frames, our group used the frames created by Chaturvedi et al.
 
-\subsection{Basline Modeling}
+\subsection{Baseline Modeling}
 
 
 
@@ -80,7 +79,20 @@ hidden markov model explanation
 LSTM stuff 
 
 \section{Experimental Setup}
-How we did everything... ? 
+
+\subsection{Data}
+Data can be found on Snigdha Chaturvedi’s professional website at https://sites.google.com/site/snigdhac/academics. Our team downloaded the data from the 2016 paper ‘Modeling Evolving Relationships between Characters in Literary Novels’. Data is formatted in such a way that there exists a separate csv file for each sequence. We combined these files into one, including character IDs for each sequence in the final data frame. For the partially annotated data, we included our manual annotations at this point in the process. Sentences that had no label (were neither positive nor negative) were discarded, leaving only two possible classes: cooperative and noncooperative. This left us with NUMBER of sentences and NUMBER of sequences. 
+
+\subsection{Modeling}
+The Decision Tree and Logistic Regression were performed using the sklearn library. Data were partitioned into a training and test set (with ratio 80:20) using the train test split functionality included in the sklearn library. 
+
+MARKOV MODEL - sampling, hyperparameters, etc 
+
+LSTM - sampling, hyperparameters, etc 
+
+\subsection{Model Evaluation}
+
+For each model used, three statistics were calculated: precision, recall, and F1 score. Overall model success was based on F1 score since it is a summary of both precision and recall and was the primary evaluation metric used in the Chaturvedi et al. paper.
 
 \section{Results and Analysis}
 Table here maybe... comparing accuracy between different models 
