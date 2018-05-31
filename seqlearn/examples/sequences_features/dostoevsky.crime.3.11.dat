@@ -1,0 +1,7 @@
+1:sentId,2:AreTeam,3:CountPosSpanWords,4:CountNegSpanWords,5:MeanPol_PosActsToEachOther_Choi,6:MeanPol_NegActsToEachOther_Choi,7:Is_PosActsToEachOther_LiuPol,8:Is_NegActsToEachOther_LiuPol,9:Is_PosActsToEachOther_MPQAPol,10:Is_NegActsToEachOther_MPQAPol,11:MeanPol_PosActs1Char_Choi,12:MeanPol_NegActs1Char_Choi,13:Is_PosActs1Char_LiuPol,14:Is_NegActs1Char_LiuPol,15:Is_PosActs1Char_MPQAPol,16:Is_NegActs1Char_MPQAPol,17:MeanPol_PosAdverbs_ActsToEachOther_Choi,18:MeanPol_NegAdverbs_ActsToEachOther_Choi,19:Is_PosAdverbs_ActsToEachOther_LiuPol,20:Is_NegAdverbs_ActsToEachOther_LiuPol,21:Is_PosAdverbs_ActsToEachOther_MPQAPol,22:Is_NegAdverbs_ActsToEachOther_MPQAPol,23:MeanPol_PosAdverbs_Acts1Char_Choi,24:MeanPol_NegAdverbs_Acts1Char_Choi,25:Is_PosAdverbs_Acts1Char_LiuPol,26:Is_NegAdverbs_Acts1Char_LiuPol,27:Is_PosAdverbs_Acts1Char_MPQAPol,28:Is_NegAdverbs_Acts1Char_MPQAPol,29:posFramesFired,30:negFramesFired,31:otherFramesFired,32:posFramewrtCharFired,33:negFramewrtCharFired,34:otherFrameswrtCharFired
+s7,0,0,0,0,0,0,0,0,0,0.5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,2,0,0,0
+s25,0,0,0,0,0,0,0,0,0,0.5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,0,0,0,0
+s38,0,0,0,0,0,0,0,0,0,0.5,0.0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+s61,1,0,1,0,0,0,0,0,0,0,8.6e-05,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1
+s77,0,0,1,0,0,0,0,0,0,0,0.149347,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0
+s85,0,0,0,0,0,0,0,0,0,0.5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
