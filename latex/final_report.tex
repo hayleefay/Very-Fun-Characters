@@ -66,7 +66,8 @@ As previously mentioned, our project is, in part, a recreation of the Chaturvedi
 
 \subsection{Feature Extraction}
 Positive and negative verb interaction features were extracted for three separate instances: characters verb together, one character verbs another, and character verb separately. In order to engineer these features, part of speech tagging and dependency parsing were run to capture the structure of the sentence and individual word roles. For characters verb together, verbs were included if they were ancestors of both characters in a sentence. For one character verbs another, verbs were included if it was between and object and subject and the object and subject were the two main characters of that sentence. Verbs that were an ancestor to either of the characters and weren't already included in another set (either characters verb together or one character verbs another) were added to the single character verbs set. Sentiment analysis was then done on all of the verbs included and a binary indicator was created to identify whether characters negatively or positively verbed. 
-In order to capture frames, our group used the frames created by Chaturvedi et al.
+In order to incorporate frame semantic parsing, our group used the frames features created by Chaturvedi et al. Chaturvedi et al. manually compiled frames that were positive or negative in nature and then included binary features indicating whether or not positive, neutral, or negative frames fired between the two characters in question.
+We recreated the features introduced by Chaturvedi et al. which includes counts of positive and negative words that appear in the span of words between mentions of the two characters. Two features were included that indicate the count of positive and negative words respectively.
 
 \subsection{Baseline Modeling}
 
@@ -85,6 +86,10 @@ In training the LSTM network, several hyperparameters were tuned: the number of 
 
 \subsection{Data}
 Data can be found on Snigdha Chaturvedi’s professional website at https://sites.google.com/site/snigdhac/academics. Our team downloaded the data from the 2015 paper ‘Modeling Evolving Relationships between Characters in Literary Novels’. Data is formatted in such a way that there exists a separate csv file for each sequence. We combined these files into one, including character IDs for each sequence in the final data frame. For the partially annotated data, we included our manual annotations at this point in the process. Sentences that had no label (were neither positive nor negative) were discarded, leaving only two possible classes: cooperative and noncooperative. This left us with 603 sentences and 100 sequences. 
+
+\subsection{Feature Extraction}
+The SpaCy library was used to perform part of speech tagging and dependency parsing. We then wrote an algorithm to identify ancestors and determine verbs included in an object-verb-subject clause. 
+In order to create the positive/negative span features, the vaderSentiment package was used. We created an algorithm that searched for the two characters in question and then found the sentiment of all words that occur in between mentions of the two characters. The total number of positive and negative words found in the spanned words in the sentence where then summed and the two features were created for each sentence.
 
 \subsection{Modeling}
 The Decision Tree and Logistic Regression were performed using the sklearn library. Data were partitioned into a training and test set (with ratio 80:20) using the train test split functionality included in the sklearn library. 
@@ -106,32 +111,50 @@ For each model used, three statistics were calculated: precision, recall, and F1
  \hline
  Model & Precision & Recall & F1 Score \\ [0.5ex] 
  \hline\hline
- Logistic Regression & 0.404 & 0.495 & 0.445 \\ 
+ Logistic Regression & 40.42 & 49.54 & 44.55 \\ 
  \hline
- Decision Tree & 0.558 & 0.554 & 0.556 \\
+ Decision Tree & 55.87 & 55.41 & 55.69 \\
  \hline
- HMM & 0.391 & 0.499 & 0.438 \\
+ HMM & 39.16 & 49.95 & 43.88 \\
  \hline
- LSTM & 0.833 & 0.817 & 0.824 \\
+ LSTM & 83.34 & 81.75 & 82.49 \\
  \hline
 \end{tabular}
-\caption{Table 1. Evaluation of Classification Models}
+\caption{Table 1. Evaluation of Classification Models- Current work}
 \label{table:1}
 \end{center}
 
-Table 1 contains the results of each of the four models used in analysis. The models which perform the worst are the logistic regression (F1 of 0.445) and the first order markov model (F1 of 0.438). Both models were influenced by the class imbalance which led to predictions consisting only of one class. The decision tree model performs slightly better with an F1 score of 0.556.  
+Table 1 contains the results of each of the four models used in analysis. The models which perform the worst are the logistic regression (F1 of 0.445) and the first order markov model (F1 of 0.438). Examining model metrics per class for the first order HMM, we see that none of the sentences labeled as describing non-cooperative relationships were identified by our model. This can likely be attributed to the class imbalance in our data, where only about one in five sentences are labeled as non-cooperative. The decision tree model performs slightly better with an F1 score of 0.556. The LSTM performs the best out of these models, however, in order to make each sequence the same length, both inputs and targets were padded with 0s; this is one limitation of our work and likely caused the model evaluation metrics to be much higher than they are in reality. 
 
-Table here maybe... comparing accuracy between different models 
+\begin{center}
+ \begin{tabular}{||c c c c||} 
+ \hline
+ Model & Precision & Recall & F1 Score \\ [0.5ex] 
+ \hline\hline
+ Logistic Regression & 54.98 & 51.83 & 50.05 \\ 
+ \hline
+ Decision Tree & 63.21 & 55.79 & 55.77 \\
+ \hline
+ Order 1 HMM & 62.45 & 63.40 & 62.84 \\
+  \hline
+ Order 2 HMM & 66.49 & 65.97 & 66.22 \\
+ \hline
+\end{tabular}
+\caption{Table 2. Evaluation of Classification Models- Chaturvedi et al. 2015}
+\label{table:2}
+\end{center}
 
-Why accuracy is different between models
+Table 2 contains the results from the Chaturvedi et al. 2015 paper. Results for almost all models differ greatly between our work and the work done by Chaturvedi et al. This is likely due to differences in the feature extraction methodology. The exact methods used by Chaturvedi et al. were not disclosed in the 2015 paper and the specific library used for part of speech tagging, depedency parsing, and framing has been officially deprecated. One interesting note is that the decision tree models have very similar scores. This is likely due to the fact that cross validation was not used in the creation of the decision tree. 
 
-Why accuracy is different between their paper and our work - feature extraction?
+
 
 
 \section{Conclusion and Future Work}
-Conclusion stuff
 
-CHANGING A LOT OF THINGS IN HEREEEEEE
+
+FUTURE WORK 
+
+Experimenting with second and third order Markov models, thus incorporating more of the history of the relationship of the pair of characters could potentially improve this model significantly.
 
 \section{References}
 Chaturvedi, Snigdha, et al. "Modeling dynamic relationships between characters in literary novels." arXiv preprint arXiv:1511.09376 (2015).
